@@ -8,6 +8,7 @@ class Rituals extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 
 		// Load form validation library
+		
 		$this->load->library('form_validation');
 
 		// Load session library
