@@ -14,7 +14,7 @@ class Rituals extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-		$this->load->model('All_Rituals');
+		$this->load->model('All_rituals');
 	}
 
     public function daily_rituals(){
@@ -24,9 +24,9 @@ class Rituals extends CI_Controller {
 		
 		$limit_per_page = 10;
         $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$total_records = $this->All_Rituals->daily_rituals_count();
+		$total_records = $this->All_rituals->daily_rituals_count();
 
-		$data["data"] = $this->All_Rituals->daily_rituals($limit_per_page, $start_index);
+		$data["data"] = $this->All_rituals->daily_rituals($limit_per_page, $start_index);
 
 		//echo "fdfdddddd";
 		//print_r($data);
@@ -85,7 +85,7 @@ class Rituals extends CI_Controller {
 				'title' => $this->input->post('title'),
 				'description' => $this->input->post('description')
 			);
-			$result = $this->All_Rituals->add_daily_ritual($data);
+			$result = $this->All_rituals->add_daily_ritual($data);
 			if ($result != false) {
 				$this->session->set_flashdata('msg', 'Added Successfully');				
 				return redirect('Rituals/daily_rituals');
@@ -102,7 +102,7 @@ class Rituals extends CI_Controller {
 		$this->form_validation->set_rules('date', 'Date', 'required');
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		if ($this->form_validation->run() == false){
-			$data["data"] = $this->All_Rituals->edit_daily_ritual($id);
+			$data["data"] = $this->All_rituals->edit_daily_ritual($id);
 			//echo "<pre>";
 			//print_r($data["data"]);
 			//die;
@@ -120,14 +120,14 @@ class Rituals extends CI_Controller {
 			//echo "<pre>";
 			//print_r($data);
 			//die;
-			$result = $this->All_Rituals->update_daily_ritual($data);
+			$result = $this->All_rituals->update_daily_ritual($data);
 			
 			if ($result != false) {
 				$this->session->set_flashdata('msg', 'Updated Successfully');				
 				return redirect('Rituals/daily_rituals');
 			}else{
 				$this->session->set_flashdata('err_msg', 'Not Updated');				
-				$data["data"] = $this->All_Rituals->edit_daily_ritual($id);
+				$data["data"] = $this->All_rituals->edit_daily_ritual($id);
 				//echo "<pre>";
 				//print_r($data["data"]);
 				//die;
@@ -144,7 +144,7 @@ class Rituals extends CI_Controller {
         if (empty($id)){
             show_404();
         }
-        if($this->All_Rituals->delete_daily_ritual($id)){
+        if($this->All_rituals->delete_daily_ritual($id)){
 			$this->session->set_flashdata('msg', 'Deleted Successfully');				
 			return redirect('Rituals/daily_rituals');
 		}else{
@@ -160,9 +160,9 @@ class Rituals extends CI_Controller {
 		
 		$limit_per_page = 10;
         $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$total_records = $this->All_Rituals->monthly_rituals_count();
+		$total_records = $this->All_rituals->monthly_rituals_count();
 
-		$data["data"] = $this->All_Rituals->monthly_rituals($limit_per_page, $start_index);
+		$data["data"] = $this->All_rituals->monthly_rituals($limit_per_page, $start_index);
 
 		//echo "fdfdddddd";
 		//print_r($data);
@@ -221,7 +221,7 @@ class Rituals extends CI_Controller {
 				'title' => $this->input->post('title'),
 				'description' => $this->input->post('description')
 			);
-			$result = $this->All_Rituals->add_monthly_ritual($data);
+			$result = $this->All_rituals->add_monthly_ritual($data);
 			if ($result != false) {
 				$this->session->set_flashdata('msg', 'Added Successfully');				
 				return redirect('Rituals/monthly_rituals');
@@ -238,7 +238,7 @@ class Rituals extends CI_Controller {
 		$this->form_validation->set_rules('date', 'Date', 'required');
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		if ($this->form_validation->run() == false){
-			$data["data"] = $this->All_Rituals->edit_monthly_ritual($id);
+			$data["data"] = $this->All_rituals->edit_monthly_ritual($id);
 			//echo "<pre>";
 			//print_r($data["data"]);
 			//die;
@@ -256,14 +256,14 @@ class Rituals extends CI_Controller {
 			//echo "<pre>";
 			//print_r($data);
 			//die;
-			$result = $this->All_Rituals->update_monthly_ritual($data);
+			$result = $this->All_rituals->update_monthly_ritual($data);
 			
 			if ($result != false) {
 				$this->session->set_flashdata('msg', 'Updated Successfully');				
 				return redirect('Rituals/monthly_rituals');
 			}else{
 				$this->session->set_flashdata('err_msg', 'Not Updated');				
-				$data["data"] = $this->All_Rituals->edit_monthly_ritual($id);
+				$data["data"] = $this->All_rituals->edit_monthly_ritual($id);
 				//echo "<pre>";
 				//print_r($data["data"]);
 				//die;
@@ -280,7 +280,7 @@ class Rituals extends CI_Controller {
         if (empty($id)){
             show_404();
         }
-        if($this->All_Rituals->delete_monthly_ritual($id)){
+        if($this->All_rituals->delete_monthly_ritual($id)){
 			$this->session->set_flashdata('msg', 'Deleted Successfully');				
 			return redirect('Rituals/monthly_rituals');
 		}else{
@@ -292,7 +292,7 @@ class Rituals extends CI_Controller {
 	public function service_daily_rituals(){
         header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Methods: GET, OPTIONS");
-		$response = $this->All_Rituals->get_daily_rituals();
+		$response = $this->All_rituals->get_daily_rituals();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	
@@ -300,7 +300,7 @@ class Rituals extends CI_Controller {
         header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		if($id > 0){
-			$response = $this->All_Rituals->get_daily_ritual($id);
+			$response = $this->All_rituals->get_daily_ritual($id);
 		}else{
 			$response = array(
 				'status' => 0,
@@ -313,7 +313,7 @@ class Rituals extends CI_Controller {
 	public function service_monthly_rituals(){
         header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Methods: GET, OPTIONS");
-		$response = $this->All_Rituals->get_monthly_rituals();
+		$response = $this->All_rituals->get_monthly_rituals();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	
@@ -321,7 +321,7 @@ class Rituals extends CI_Controller {
         header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		if($id > 0){
-			$response = $this->All_Rituals->get_monthly_ritual($id);
+			$response = $this->All_rituals->get_monthly_ritual($id);
 		}else{
 			$response = array(
 				'status' => 0,

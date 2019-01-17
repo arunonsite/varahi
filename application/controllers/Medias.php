@@ -14,7 +14,7 @@ class Medias extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-		$this->load->model('All_Medias');
+		$this->load->model('All_medias');
 	}
 
     public function videos(){
@@ -24,9 +24,9 @@ class Medias extends CI_Controller {
 		
 		$limit_per_page = 10;
         $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$total_records = $this->All_Medias->videos_count();
+		$total_records = $this->All_medias->videos_count();
 
-		$data["data"] = $this->All_Medias->videos($limit_per_page, $start_index);
+		$data["data"] = $this->All_medias->videos($limit_per_page, $start_index);
 
 		//echo "fdfdddddd";
 		//print_r($data);
@@ -85,7 +85,7 @@ class Medias extends CI_Controller {
 				'title' => $this->input->post('title'),
 				'description' => $this->input->post('description')
 			);
-			$result = $this->All_Medias->add_video($data);
+			$result = $this->All_medias->add_video($data);
 			if ($result != false) {
 				$this->session->set_flashdata('msg', 'Added Successfully');				
 				return redirect('Medias/videos');
@@ -102,7 +102,7 @@ class Medias extends CI_Controller {
 		$this->form_validation->set_rules('url', 'URL', 'required');
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		if ($this->form_validation->run() == false){
-			$data["data"] = $this->All_Medias->edit_video($id);
+			$data["data"] = $this->All_medias->edit_video($id);
 			//echo "<pre>";
 			//print_r($data["data"]);
 			//die;
@@ -121,14 +121,14 @@ class Medias extends CI_Controller {
 			//echo "<pre>";
 			//print_r($data);
 			//die;
-			$result = $this->All_Medias->update_video($data);
+			$result = $this->All_medias->update_video($data);
 			
 			if ($result != false) {
 				$this->session->set_flashdata('msg', 'Updated Successfully');				
 				return redirect('Medias/videos');
 			}else{
 				$this->session->set_flashdata('err_msg', 'Not Updated');				
-				$data["data"] = $this->All_Medias->edit_video($id);
+				$data["data"] = $this->All_medias->edit_video($id);
 				//echo "<pre>";
 				//print_r($data["data"]);
 				//die;
@@ -145,7 +145,7 @@ class Medias extends CI_Controller {
         if (empty($id)){
             show_404();
         }
-        if($this->All_Medias->delete_video($id)){
+        if($this->All_medias->delete_video($id)){
 			$this->session->set_flashdata('msg', 'Deleted Successfully');				
 			return redirect('Medias/videos');
 		}else{
@@ -155,13 +155,13 @@ class Medias extends CI_Controller {
 	}
 
 	public function service_videos(){
-		$response = $this->All_Medias->get_videos();
+		$response = $this->All_medias->get_videos();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	
 	public function service_video($id=''){
 		if($id > 0){
-			$response = $this->All_Medias->get_video($id);
+			$response = $this->All_medias->get_video($id);
 		}else{
 			$response = array(
 				'status' => 0,
@@ -181,9 +181,9 @@ class Medias extends CI_Controller {
 		
 		$limit_per_page = 10;
         $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$total_records = $this->All_Medias->photo_count();
+		$total_records = $this->All_medias->photo_count();
 
-		$data["data"] = $this->All_Medias->photos($limit_per_page, $start_index);
+		$data["data"] = $this->All_medias->photos($limit_per_page, $start_index);
 
 		//echo "fdfdddddd";
 		//print_r($data);
@@ -250,7 +250,7 @@ class Medias extends CI_Controller {
 			);
 
 
-			$result = $this->All_Medias->add_photo($data);
+			$result = $this->All_medias->add_photo($data);
 			if ($result != false) {
 				$data['mode'] = 'photo';
 				$data['id'] = $result;
@@ -268,7 +268,7 @@ class Medias extends CI_Controller {
 	public function edit_photo($id){
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		if ($this->form_validation->run() == false){
-			$data["data"] = $this->All_Medias->edit_photo($id);
+			$data["data"] = $this->All_medias->edit_photo($id);
 			//echo "<pre>";
 			//print_r($data["data"]);
 			//echo "</pre>";
@@ -288,7 +288,7 @@ class Medias extends CI_Controller {
 			//print_r($data);
 			//die;
 			
-			$result = $this->All_Medias->update_photo($data);			
+			$result = $this->All_medias->update_photo($data);			
 			if ($result != false) {
 				$data['mode'] = 'photo';
 				$data['id'] = $result;
@@ -297,7 +297,7 @@ class Medias extends CI_Controller {
 				return redirect('Medias/photos');
 			}else{
 				$this->session->set_flashdata('err_msg', 'Not Updated');				
-				$data["data"] = $this->All_Medias->edit_photo($id);
+				$data["data"] = $this->All_medias->edit_photo($id);
 				//echo "<pre>";
 				//print_r($data["data"]);
 				//die;
@@ -314,12 +314,12 @@ class Medias extends CI_Controller {
         if (empty($id)){
             show_404();
         }
-        $data = $this->All_Medias->edit_photo($id);
+        $data = $this->All_medias->edit_photo($id);
         //echo "<pre>";
         //print_r($data);
         //echo realpath('uploads/'.$data['photo_name']);
         //die;
-        if($this->All_Medias->delete_photo($id)){
+        if($this->All_medias->delete_photo($id)){
         	@unlink(realpath('uploads/photos/'.$data['photo_name']));
         	@unlink(realpath('uploads/photos/thumbnails/'.$data['thumb_photo_name']));
 			$this->session->set_flashdata('msg', 'Deleted Successfully');				
@@ -354,7 +354,7 @@ class Medias extends CI_Controller {
 
         $uploaded_data = $this->upload->data();
         if($mode=="photo"){
-        	$get_photo_data = $this->All_Medias->edit_photo($id);
+        	$get_photo_data = $this->All_medias->edit_photo($id);
 			@unlink(realpath('uploads/photos/'.$get_photo_data['photo_name']));
 			@unlink(realpath('uploads/photos/thumbnails/'.$get_photo_data['thumb_photo_name']));
 			$filename = $uploaded_data['file_name'];
@@ -367,16 +367,16 @@ class Medias extends CI_Controller {
 					'photo_id' => $id
 				);
 
-	        	$result = $this->All_Medias->add_photo_update_photo($data);
+	        	$result = $this->All_medias->add_photo_update_photo($data);
 	    	}
         }else{
-        	$get_song_data = $this->All_Medias->edit_song($id);
+        	$get_song_data = $this->All_medias->edit_song($id);
 			@unlink(realpath('uploads/songs/'.$get_song_data['song_name']));
 			$data = array(
 				'song_name' => $uploaded_data['file_name'],
 				'song_id' => $id
 			);
-			$result = $this->All_Medias->update_only_song($data);
+			$result = $this->All_medias->update_only_song($data);
         }
         
 		//echo "--SS-<pre>";
@@ -425,13 +425,13 @@ class Medias extends CI_Controller {
    }
 
    public function service_photos(){
-		$response = $this->All_Medias->get_photos();
+		$response = $this->All_medias->get_photos();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	
 	public function service_photo($id=''){
 		if($id > 0){
-			$response = $this->All_Medias->get_photo($id);
+			$response = $this->All_medias->get_photo($id);
 		}else{
 			$response = array(
 				'status' => 0,
@@ -450,9 +450,9 @@ class Medias extends CI_Controller {
 		
 		$limit_per_page = 10;
         $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$total_records = $this->All_Medias->song_count();
+		$total_records = $this->All_medias->song_count();
 
-		$data["data"] = $this->All_Medias->songs($limit_per_page, $start_index);
+		$data["data"] = $this->All_medias->songs($limit_per_page, $start_index);
 
 		//echo "fdfdddddd";
 		//print_r($data);
@@ -518,7 +518,7 @@ class Medias extends CI_Controller {
 			);
 
 
-			$result = $this->All_Medias->add_song($data);
+			$result = $this->All_medias->add_song($data);
 			if ($result != false) {
 				$data['mode'] = 'song';
 				$data['id'] = $result;
@@ -536,7 +536,7 @@ class Medias extends CI_Controller {
 	public function edit_song($id){
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		if ($this->form_validation->run() == false){
-			$data["data"] = $this->All_Medias->edit_song($id);
+			$data["data"] = $this->All_medias->edit_song($id);
 			//echo "<pre>";
 			//print_r($data["data"]);
 			//echo "</pre>";
@@ -556,7 +556,7 @@ class Medias extends CI_Controller {
 			//print_r($data);
 			//die;
 			
-			$result = $this->All_Medias->update_song($data);			
+			$result = $this->All_medias->update_song($data);			
 			if ($result != false) {
 				$data['mode'] = 'song';
 				$data['id'] = $result;
@@ -565,7 +565,7 @@ class Medias extends CI_Controller {
 				return redirect('Medias/songs');
 			}else{
 				$this->session->set_flashdata('err_msg', 'Not Updated');				
-				$data["data"] = $this->All_Medias->edit_song($id);
+				$data["data"] = $this->All_medias->edit_song($id);
 				//echo "<pre>";
 				//print_r($data["data"]);
 				//die;
@@ -582,12 +582,12 @@ class Medias extends CI_Controller {
         if (empty($id)){
             show_404();
         }
-        $data = $this->All_Medias->edit_song($id);
+        $data = $this->All_medias->edit_song($id);
         //echo "<pre>";
         //print_r($data);
         //echo realpath('uploads/'.$data['photo_name']);
         //die;
-        if($this->All_Medias->delete_song($id)){
+        if($this->All_medias->delete_song($id)){
         	@unlink(realpath('uploads/songs/'.$data['song_name']));
 			$this->session->set_flashdata('msg', 'Deleted Successfully');				
 			return redirect('Medias/songs');
@@ -598,13 +598,13 @@ class Medias extends CI_Controller {
 	}
 	
 	public function service_songs(){
-		$response = $this->All_Medias->get_songs();
+		$response = $this->All_medias->get_songs();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	
 	public function service_song($id=''){
 		if($id > 0){
-			$response = $this->All_Medias->get_song($id);
+			$response = $this->All_medias->get_song($id);
 		}else{
 			$response = array(
 				'status' => 0,

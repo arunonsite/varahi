@@ -16,7 +16,7 @@ class Happenings extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-		$this->load->model('All_Happenings');
+		$this->load->model('All_happenings');
 	}
 	
     public function index(){
@@ -32,9 +32,9 @@ class Happenings extends CI_Controller {
 		
 		$limit_per_page = 10;
         $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$total_records = $this->All_Happenings->monthly_important_days_count();
+		$total_records = $this->All_happenings->monthly_important_days_count();
 
-		$data["data"] = $this->All_Happenings->important_days($limit_per_page, $start_index);
+		$data["data"] = $this->All_happenings->important_days($limit_per_page, $start_index);
 
 		//echo "fdfdddddd";
 		//print_r($data);
@@ -79,9 +79,9 @@ class Happenings extends CI_Controller {
 		$this->load->view('monthly_important_days', $data);
 		$this->load->view('templates/footer');
 		
-		//$all_data = $this->All_Happenings->important_days();
+		//$all_data = $this->All_happenings->important_days();
 		//echo "<pre>";
-		//print_r($this->All_Happenings->important_days());
+		//print_r($this->All_happenings->important_days());
 		//die;
 	}
 	
@@ -98,7 +98,7 @@ class Happenings extends CI_Controller {
 				'title' => $this->input->post('title'),
 				'description' => $this->input->post('description')
 			);
-			$result = $this->All_Happenings->add_important_days($data);
+			$result = $this->All_happenings->add_important_days($data);
 			if ($result != false) {
 				// Add user data in session
 				/*$data = array(
@@ -125,7 +125,7 @@ class Happenings extends CI_Controller {
 		$this->form_validation->set_rules('date', 'Date', 'required');
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		if ($this->form_validation->run() == false){
-			$data["data"] = $this->All_Happenings->edit_important_days($id);
+			$data["data"] = $this->All_happenings->edit_important_days($id);
 			//echo "<pre>";
 			//print_r($data["data"]);
 			//die;
@@ -143,7 +143,7 @@ class Happenings extends CI_Controller {
 			//echo "<pre>";
 			//print_r($data);
 			//die;
-			$result = $this->All_Happenings->update_monthly_important_days($data);
+			$result = $this->All_happenings->update_monthly_important_days($data);
 			
 			if ($result != false) {
 				// Add user data in session
@@ -158,7 +158,7 @@ class Happenings extends CI_Controller {
 				//	'error_message' => 'Some Error'
 				//);
 				$this->session->set_flashdata('err_msg', 'Not Updated');				
-				$data["data"] = $this->All_Happenings->edit_important_days($id);
+				$data["data"] = $this->All_happenings->edit_important_days($id);
 				//echo "<pre>";
 				//print_r($data["data"]);
 				//die;
@@ -175,11 +175,11 @@ class Happenings extends CI_Controller {
         if (empty($id)){
             show_404();
         }
-        if($this->All_Happenings->delete_monthly_important_day($id)){
+        if($this->All_happenings->delete_monthly_important_day($id)){
 			//$data = array(
 			//	'success_message' => 'Deleted Successfully'
 			//);
-			//$data["data"] = $this->All_Happenings->important_days();
+			//$data["data"] = $this->All_happenings->important_days();
 			//$this->load->view('templates/header');
 			//$this->load->view('Happenings/monthly_important_days/index', $data);
 			//$this->load->view('templates/footer');
@@ -195,7 +195,7 @@ class Happenings extends CI_Controller {
 	public function service_important_days(){
         header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Methods: GET, OPTIONS");
-		$response = $this->All_Happenings->get_important_days();
+		$response = $this->All_happenings->get_important_days();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
@@ -203,7 +203,7 @@ class Happenings extends CI_Controller {
         header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		if($id > 0){
-			$response = $this->All_Happenings->get_important_day($id);
+			$response = $this->All_happenings->get_important_day($id);
 		}else{
 			$response = array(
 				'status' => 0,

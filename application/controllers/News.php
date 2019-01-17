@@ -14,7 +14,7 @@ class News extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-		$this->load->model('All_News');
+		$this->load->model('All_news');
 	}
 
     public function news(){
@@ -24,9 +24,9 @@ class News extends CI_Controller {
 		
 		$limit_per_page = 10;
         $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$total_records = $this->All_News->news_count();
+		$total_records = $this->All_news->news_count();
 
-		$data["data"] = $this->All_News->news($limit_per_page, $start_index);
+		$data["data"] = $this->All_news->news($limit_per_page, $start_index);
 
 		//echo "fdfdddddd";
 		//print_r($data);
@@ -83,7 +83,7 @@ class News extends CI_Controller {
 				'title' => $this->input->post('title'),
 				'description' => $this->input->post('description')
 			);
-			$result = $this->All_News->add_news($data);
+			$result = $this->All_news->add_news($data);
 			if ($result != false) {
 				$this->session->set_flashdata('msg', 'Added Successfully');				
 				return redirect('News/news');
@@ -98,7 +98,7 @@ class News extends CI_Controller {
 	public function edit_news($id){
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		if ($this->form_validation->run() == false){
-			$data["data"] = $this->All_News->edit_news($id);
+			$data["data"] = $this->All_news->edit_news($id);
 			//echo "<pre>";
 			//print_r($data["data"]);
 			//die;
@@ -116,14 +116,14 @@ class News extends CI_Controller {
 			//echo "<pre>";
 			//print_r($data);
 			//die;
-			$result = $this->All_News->update_news($data);
+			$result = $this->All_news->update_news($data);
 			
 			if ($result != false) {
 				$this->session->set_flashdata('msg', 'Updated Successfully');				
 				return redirect('News/news');
 			}else{
 				$this->session->set_flashdata('err_msg', 'Not Updated');				
-				$data["data"] = $this->All_News->edit_news($id);
+				$data["data"] = $this->All_news->edit_news($id);
 				//echo "<pre>";
 				//print_r($data["data"]);
 				//die;
@@ -140,7 +140,7 @@ class News extends CI_Controller {
         if (empty($id)){
             show_404();
         }
-        if($this->All_News->delete_news($id)){
+        if($this->All_news->delete_news($id)){
 			$this->session->set_flashdata('msg', 'Deleted Successfully');				
 			return redirect('News/news');
 		}else{
@@ -152,13 +152,13 @@ class News extends CI_Controller {
 	public function service_latest_all_news(){
 		header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Methods: GET, OPTIONS");
-		$response = $this->All_News->get_latest_all_news();
+		$response = $this->All_news->get_latest_all_news();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	
 	public function service_latest_news($id=''){
 		if($id > 0){
-			$response = $this->All_News->get_latest_news($id);
+			$response = $this->All_news->get_latest_news($id);
 		}else{
 			$response = array(
 				'status' => 0,

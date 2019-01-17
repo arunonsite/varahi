@@ -1,6 +1,6 @@
 <?php
 
-Class All_News extends CI_Model {
+Class All_news extends CI_Model {
 	function __construct(){
       parent::__construct();
     }

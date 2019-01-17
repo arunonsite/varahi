@@ -1,6 +1,6 @@
 <?php
 
-Class All_Happenings extends CI_Model {
+Class All_happenings extends CI_Model {
 	function __construct() 
     {
       parent::__construct();
