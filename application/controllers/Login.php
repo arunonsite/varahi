@@ -16,7 +16,7 @@ class Login extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-		$this->load->model('User_login');
+		$this->load->model('user_login');
 	}
 	
     public function index()  
@@ -44,10 +44,10 @@ class Login extends CI_Controller {
 				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password')
 			);
-			$result = $this->User_login->login($data);
+			$result = $this->user_login->login($data);
 			if ($result == true) {
 				$username = $this->input->post('username');
-				$result = $this->User_login->read_user_information($username);
+				$result = $this->user_login->read_user_information($username);
 				if ($result != false) {
 					$session_data = array(
 						'username' => $result[0]->user_name,
@@ -85,7 +85,7 @@ class Login extends CI_Controller {
 			$password = $this->input->post('password');
 			$data['user_id'] = $this->session->userdata('logged_in')['user_id'];
 			$data['password'] = $password;
-			$result = $this->User_login->update_password($data);
+			$result = $this->user_login->update_password($data);
 			if ($result != false) {
 				/*$data = array(
 					'success_message' => 'Password changed successfully'
