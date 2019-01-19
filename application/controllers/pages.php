@@ -12,10 +12,10 @@ class pages extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-		$this->load->model('All_Rituals');
-		$this->load->model('All_Happenings');
-		$this->load->model('All_Medias');
-		$this->load->model('All_News');
+		$this->load->model('All_rituals');
+		$this->load->model('All_happenings');
+		$this->load->model('All_medias');
+		$this->load->model('All_news');
 	}
 
     public function view($page = 'home'){
@@ -24,13 +24,13 @@ class pages extends CI_Controller {
             show_404();
 		}
 
-		$video_count = $this->All_Medias->videos_count();
-		$important_days_count = $this->All_Happenings->monthly_important_days_count();
-		$news_count = $this->All_News->news_count();
-		$daily_ritual_count = $this->All_Rituals->daily_rituals_count();
-		$monthly_ritual_count = $this->All_Rituals->monthly_rituals_count();
-		$photo_count = $this->All_Medias->photo_count();
-		$song_count = $this->All_Medias->song_count();
+		$video_count = $this->All_medias->videos_count();
+		$important_days_count = $this->All_happenings->monthly_important_days_count();
+		$news_count = $this->All_news->news_count();
+		$daily_ritual_count = $this->All_rituals->daily_rituals_count();
+		$monthly_ritual_count = $this->All_rituals->monthly_rituals_count();
+		$photo_count = $this->All_medias->photo_count();
+		$song_count = $this->All_medias->song_count();
 
 		$data['title'] = ucfirst($page); // Capitalize the first letter
 		$data['video_count'] = $video_count;

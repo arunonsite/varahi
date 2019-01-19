@@ -155,11 +155,15 @@ class Medias extends CI_Controller {
 	}
 
 	public function service_videos(){
+	header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		$response = $this->All_medias->get_videos();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	
 	public function service_video($id=''){
+	header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		if($id > 0){
 			$response = $this->All_medias->get_video($id);
 		}else{
@@ -425,11 +429,15 @@ class Medias extends CI_Controller {
    }
 
    public function service_photos(){
+   header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		$response = $this->All_medias->get_photos();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	
 	public function service_photo($id=''){
+	header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		if($id > 0){
 			$response = $this->All_medias->get_photo($id);
 		}else{
