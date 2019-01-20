@@ -157,6 +157,8 @@ class News extends CI_Controller {
 	}
 	
 	public function service_latest_news($id=''){
+	header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		if($id > 0){
 			$response = $this->All_news->get_latest_news($id);
 		}else{

@@ -606,11 +606,15 @@ class Medias extends CI_Controller {
 	}
 	
 	public function service_songs(){
+	header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		$response = $this->All_medias->get_songs();
 		$this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	
 	public function service_song($id=''){
+	header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Methods: GET, OPTIONS");
 		if($id > 0){
 			$response = $this->All_medias->get_song($id);
 		}else{
