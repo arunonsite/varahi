@@ -1,6 +1,6 @@
 <?php
 
-Class All_Medias extends CI_Model {
+Class All_medias extends CI_Model {
 	function __construct(){
       parent::__construct();
     }
