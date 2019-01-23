@@ -65,8 +65,7 @@
           <a class="nav-link" href="<?php echo site_url("Medias/songs");?>">Songs</a>
         </li>
 		<li class="nav-item px-3">
-          <!--<a class="nav-link" href="<?php //echo site_url("News/news");?>">Latest News</a>-->
-          <a class="nav-link" href="<?php echo site_url("Medias/mantras");?>">Mantras</a>
+          <a class="nav-link" href="<?php echo site_url("News/news");?>">Latest News</a>
         </li>
       </ul>
       <ul class="nav navbar-nav ml-auto">        
@@ -135,8 +134,8 @@
               </a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link" href="<?php echo site_url("Medias/mantras");?>">
-                <i class="nav-icon icon-speedometer"></i> Mantras
+              <a class="nav-link" href="<?php echo site_url("News/news");?>">
+                <i class="nav-icon icon-speedometer"></i> Latest News
                 <!--<span class="badge badge-primary">NEW</span>-->
               </a>
             </li>

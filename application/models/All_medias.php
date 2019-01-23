@@ -1,7 +1,6 @@
 <?php
 
-Class All_medias extends CI_Model {
-
+Class All_Medias extends CI_Model {
 	function __construct(){
       parent::__construct();
     }
@@ -397,6 +396,120 @@ Class All_medias extends CI_Model {
 			$fetched_data = $query->result();
 			foreach ($fetched_data as $key => $value) {
 				$fetched_data[$key]->song_name = base_url()."uploads/songs/".$value->song_name;
+			}
+			$response = array(
+				'status' => 1,
+				'data' => $fetched_data
+			);
+			return $response;
+		} else {
+			$response = array(
+				'status' => 0,
+				'data' => ''
+			);
+			return $response;
+		}
+	}
+    
+    // Mantras
+
+	// Read data using username and password
+	public function mantras($limit,$start) {
+		//echo $start;
+		$this->db->limit($limit, $start);
+		$query = $this->db->get("mantras");
+		//echo "<pre>";
+		//print_r($query);
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return false;
+		}
+	}
+
+	public function mantra_count() {
+		return $this->db->count_all("mantras");
+	}
+
+
+	// Read data using username and password
+	public function edit_mantra($id) {
+		$condition = "mantra_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('mantras');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		//print_r($query);
+		if ($query->num_rows() > 0) {
+			return $query->row_array();
+		} else {
+			return false;
+		}
+	}
+
+	// Insert data to database
+	public function add_mantra($data) {
+		//print_r($data);die;
+		$insert_data = array(
+			'title' => $data['title'],
+			'description' => $data['description']
+		);
+		if ($this->db->insert('mantras', $insert_data)) {
+			return $this->db->insert_id();;
+		} else {
+			return false;
+		}
+	}
+	
+	// Read data from database to show data in admin page
+	public function delete_mantra($id) {		
+		$this->db->where('mantra_id', $id);
+		if ($this->db->delete('mantras')) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function update_mantra($data){
+		//echo "<pre>";print_r($data);die;
+		$update_data = array(
+			'title' => $data['title'],
+			'description' => $data['description'],
+			'status' => $data['status']
+		);
+		$this->db->where('mantra_id',$data['mantra_id']);
+		
+		if($this->db->update('mantras',$update_data)){
+			return $data['mantra_id'];
+		} else {
+			return false;
+		}
+	}
+
+	public function update_only_mantra($data){
+		//echo "<pre>";print_r($data);
+		//die;
+		$update_data = array(
+			'mantra_name' => $data['mantra_name']
+		);
+		$this->db->where('mantra_id', $data['mantra_id']);
+		
+		if($this->db->update('mantras',$update_data)){
+			return true;
+		} else {
+			return false;
+		}
+	}
+    
+    public function get_mantras() {
+		$this->db->where('status',1);
+		$query = $this->db->get("mantras");
+		if ($query->num_rows() > 0) {
+			$fetched_data = $query->result();
+			foreach ($fetched_data as $key => $value) {
+				$fetched_data[$key]->mantra_name = base_url()."uploads/mantras/".$value->mantra_name;
 			}
 			$response = array(
 				'status' => 1,

@@ -167,11 +167,11 @@ if($this->session->userdata('logged_in') == FALSE) {
 				<i class="icon-settings"></i>
 			  </button>
 			  <div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="<?php echo site_url("News/add_news");?>">Add News</a>
+				<a class="dropdown-item" href="<?php echo site_url("Medias/add_mantra");?>">Add Mantra</a>
 			  </div>
 			</div>
-			<div class="text-value"><?php echo $news_count;?></div>
-			<div>Latest News</div>
+			<div class="text-value"><?php echo $mantra_count;?></div>
+			<div>Mantras</div>
 		  </div>
 		  <div style="height:85px;">
 			&nbsp;
