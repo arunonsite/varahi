@@ -40,7 +40,6 @@ if($this->session->userdata('logged_in') == FALSE) {
 							<table class="table table-responsive-sm table-bordered table-striped table-sm">
 							<thead>
 								<tr>
-									<th>Thumb</th>
 									<th>Title</th>
 									<th>Date</th>
 									<th>Status</th>
@@ -51,11 +50,7 @@ if($this->session->userdata('logged_in') == FALSE) {
 							<?php if($data) : ?>
 							<?php foreach($data as $days) :?>
 								<tr>
-									<td>
-										<?php if (getimagesize(base_url() . 'uploads/photos/thumbnails/'.$days->thumb_photo_name)) { ?>
-            							<img src=<?php echo base_url() . 'uploads/photos/thumbnails/' . $days->thumb_photo_name;?> />
-              							<?php }else{ echo "6666";} ?>
-									</td>
+									
 									<td><?php echo $days->title;?></td>
 									<td><?php echo date("d-m-Y", strtotime($days->date));?></td>
 									<td><span class="<?php echo ($days->status == 1) ? 'badge badge-success' : 'badge badge-secondary';?>"><?php echo ($days->status == 1) ? 'Active' : 'Inactive';?></span></td>

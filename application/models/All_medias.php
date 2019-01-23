@@ -210,7 +210,7 @@ Class All_medias extends CI_Model {
 		//die;
 		$update_data = array(
 			'photo_name' => $data['photo_name'],
-			'thumb_photo_name' => $data['thumb_photo_name']
+			//'thumb_photo_name' => $data['thumb_photo_name']
 		);
 		$this->db->where('photo_id', $data['photo_id']);
 		

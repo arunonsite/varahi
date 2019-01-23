@@ -38,9 +38,7 @@ if($this->session->userdata('logged_in') == FALSE) {
             </div>
             <div class="input-group mb-4">
               <?php echo form_upload(['name'=>'photo_name', 'class' => 'form-control', 'placeholder' => 'Photo', 'id' => 'photo_name']); ?>
-              <?php if (getimagesize(base_url() . 'uploads/photos/thumbnails/'.$data['thumb_photo_name'])) { ?>
-                <img src=<?php echo base_url() . 'uploads/photos/thumbnails/' . $data['thumb_photo_name'];?> />
-              <?php }else{ echo "6666";} ?>
+              
             </div>
 		        <div class="input-group mb-4">
             <?php 

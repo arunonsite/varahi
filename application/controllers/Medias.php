@@ -368,17 +368,17 @@ class Medias extends CI_Controller {
 			@unlink(realpath('uploads/photos/'.$get_photo_data['photo_name']));
 			@unlink(realpath('uploads/photos/thumbnails/'.$get_photo_data['thumb_photo_name']));
 			$filename = $uploaded_data['file_name'];
-	        if($this->resizeImage($filename)){
-	        	$split_image = explode(".", $uploaded_data['file_name']);
-	        	$thumb = $split_image[0] . '_thumb.' . $split_image[1];
+	        //if($this->resizeImage($filename)){
+	        	//$split_image = explode(".", $uploaded_data['file_name']);
+	        	//$thumb = $split_image[0] . '_thumb.' . $split_image[1];
 	        	$data = array(
 					'photo_name' => $uploaded_data['file_name'],
-					'thumb_photo_name' => $thumb,
+					//'thumb_photo_name' => $thumb,
 					'photo_id' => $id
 				);
 
 	        	$result = $this->All_medias->add_photo_update_photo($data);
-	    	}
+	    	//}
         }elseif($mode=="mantra"){
         	$get_mantra_data = $this->All_medias->edit_mantra($id);
 			@unlink(realpath('uploads/mantras/'.$get_mantra_data['mantra_name']));
